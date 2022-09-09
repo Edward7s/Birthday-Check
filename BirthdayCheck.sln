@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32804.467
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BirthdayCheck", "BirthdayCheck\BirthdayCheck.csproj", "{D5359D90-D6A9-4510-AC32-F66113305B0D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D5359D90-D6A9-4510-AC32-F66113305B0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5359D90-D6A9-4510-AC32-F66113305B0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5359D90-D6A9-4510-AC32-F66113305B0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5359D90-D6A9-4510-AC32-F66113305B0D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7041A0B4-1F0A-4EAD-B123-5E7EC4B036F8}
+	EndGlobalSection
+EndGlobal

@@ -12,7 +12,7 @@ namespace BirthdayCheck
         private Json.PersonInfo _person { get; set; } = new Json.PersonInfo();
         private bool _foundBday { get; set; } = false;
         private string _time { get; set; }
-        public bool IsOpen { get; set; } = true;
+        public bool IsOpen { get; set; } = false;
         private int? _state { get; set; } = null;
         private int? _currentKey { get; set; } = null;
         private string _fileText { get; set; }

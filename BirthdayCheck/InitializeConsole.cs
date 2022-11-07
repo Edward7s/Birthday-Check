@@ -21,12 +21,12 @@ namespace BirthdayCheck
         public InitializeConsole()
         {
             Instance = this;
-            if (!File.Exists(Directory.GetCurrentDirectory() + "//BDays.json"))
+            if (!File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "//BDays.json"))
             {
-                File.Create(Directory.GetCurrentDirectory() + "//BDays.json").Close();
+                File.Create(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "//BDays.json").Close();
                 SaveJson(new Json.PersonInfo() { Name = "Edward7.", Date = "09/09", Note = "Default" });
             }
-            _personInfo = JsonConvert.DeserializeObject<List<Json.PersonInfo>>(File.ReadAllText(Directory.GetCurrentDirectory() + "//BDays.json"));
+            _personInfo = JsonConvert.DeserializeObject<List<Json.PersonInfo>>(File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "//BDays.json"));
             Imports.AllocConsole();
             ConsoleHwnd = Imports.GetConsoleWindow();
             Imports.ShowWindow(ConsoleHwnd, 0);
@@ -47,6 +47,7 @@ namespace BirthdayCheck
                 Console.WriteLine("------[Press Enter To Go Back To The Menu]------");
                 Console.ReadLine();
                 _currentTime = DateAndTime.Now.ToString("dd/MM");
+                IsOpen = true;
                 DefaultMenu();
                 OpenedMenu();
             }
@@ -55,7 +56,7 @@ namespace BirthdayCheck
         }
         public void SaveJson(Json.PersonInfo person)
         {
-            _fileText = File.ReadAllText(Directory.GetCurrentDirectory() + "//BDays.json");
+            _fileText = File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "//BDays.json");
             if (_fileText == String.Empty)
             {
                 _personInfo = new List<Json.PersonInfo>();
@@ -65,7 +66,7 @@ namespace BirthdayCheck
                     Date = person.Date,
                     Note = person.Note
                 });
-                File.WriteAllText(Directory.GetCurrentDirectory() + "//BDays.json", JsonConvert.SerializeObject(_personInfo));
+                File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "//BDays.json", JsonConvert.SerializeObject(_personInfo));
                 Log("User", "Added User: " + person.Name + " On: " + person.Date);
                 return;
             }
@@ -76,7 +77,7 @@ namespace BirthdayCheck
                 Date = person.Date,
                 Note = person.Note
             });
-            File.WriteAllText(Directory.GetCurrentDirectory() + "//BDays.json", JsonConvert.SerializeObject(_personInfo));
+            File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "//BDays.json", JsonConvert.SerializeObject(_personInfo));
             Log("User", "Added User: " + person.Name + " On: " + person.Date);
         }
         private void DefaultMenu()
@@ -169,16 +170,15 @@ namespace BirthdayCheck
                     if (_personInfo[i].Date != _time) continue;
                     if (!_foundBday)
                     {
-                        Imports.ShowWindow(ConsoleHwnd, 5);
+                        if (!IsOpen)
+                            ToggleConsole();
                         Console.ForegroundColor = ConsoleColor.Green;
                         Console.Clear();
                         _state = null;
                     }
                     _foundBday = true;
-                    if (!IsOpen)
-                        ToggleConsole();
-
                     Console.WriteLine($"Its {_personInfo[i].Name} BIRTHDAY  {(_personInfo[i].Note == null ? "" : " Note: " + _personInfo[i].Note)}");
+              
                     Thread.Sleep(200);
                 }
                 if (_foundBday)

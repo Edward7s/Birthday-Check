@@ -1,3 +1,5 @@
+using Microsoft.Win32;
+
 namespace BirthdayCheck
 {
     internal static class Program
@@ -12,7 +14,9 @@ namespace BirthdayCheck
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             Application.Run(new Form1());
-            
+            RegistryKey startup = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+            if (startup.GetValue("Brithdaycheckerx") == null)
+                startup.SetValue("Brithdaycheckerx", Directory.GetCurrentDirectory() + "\\BirthdayCheck.exe");
         }
     }
 }
